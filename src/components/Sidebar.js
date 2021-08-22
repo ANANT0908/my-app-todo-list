@@ -1,8 +1,7 @@
 import React from 'react';
 import {FaInbox , FaRegCalendarAlt,FaRegCalendar } from 'react-icons/fa';
 
-
-const Sidebar = ( selectedTab , setSelectedTab )=>{
+const Sidebar = (selectedTab, setSelectedTab )=>{
 
     return(
       <div className="sidebar" > 

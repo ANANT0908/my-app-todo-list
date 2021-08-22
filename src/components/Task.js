@@ -117,8 +117,9 @@ const Task = ({selectedTab})=>{
             )}
             {tasks.length > 0 ?
             tasks.map((task) => (
-                <p> {task}
-                    {"  "}
+                <p>
+                 {task}
+                    {" "}
                     {dateFnsFormat(new Date(),FORMAT)}
                     
                  </p>
