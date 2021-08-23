@@ -71,20 +71,14 @@ const TaskItems = ({selectedTab,tasks}) =>{
        
     }
     if(selectedTab === "TODAY"){
-        taskToRender = taskToRender.filter(
-            (task) => isToday(task.date))
-        .map((task) =>(
-            <p>
-                {task.text} {dateFnsFormat(new Date(task.date),FORMAT)}{"  "}
-            </p>
-        ));  
+        taskToRender = taskToRender.filter((task) => isToday(task.date));
     }
     return(
         <div className="task-items-container" >
          {taskToRender.map((task) =>(
-             <div className="task-item" >
+             <div className="task-items" >
             <p>{task.text}</p>
-            <p>{dateFnsFormat(new Date(task.date),FORMAT)}{"  "}</p>
+            <p> {dateFnsFormat(new Date(task.date),FORMAT)}</p>
              </div>
     ))}
     </div>
@@ -97,34 +91,29 @@ const Task = ({selectedTab})=>{
 
     const addNewTask = (text, date) =>{
         const newTaskItem = {text,date: date || new Date() };
-        setTasks((prevstate) => [...prevstate,text]);
+        setTasks((prevstate) => [...prevstate,newTaskItem]);
     };
     return(
         <div className="tasks" >
             <h1>{TASKS_HEADER_MAPPING[selectedTab]}</h1>
 
-           {selectedTab === 'INBOX' ? (<div className="add-task-btn" 
-            onClick={()=> setShowAddTask((prevstate)=> !prevstate)}
-             >
+           {selectedTab === 'INBOX' ? (
+            <div className="add-task-btn" onClick={()=> setShowAddTask((prevstate)=> !prevstate)}>
                 <span className="plus" >+</span>
                 <span className="add-task-text" >Add Task</span>
-            </div>):null}
+            </div>
+            ):null}
+
             {showAddTask && ( 
                 <AddTask 
                 onAddTask={addNewTask} 
                 onCancel={() => setShowAddTask(false)} 
             />
             )}
-            {tasks.length > 0 ?
-            tasks.map((task) => (
-                <p>
-                 {task}
-                    {" "}
-                    {dateFnsFormat(new Date(),FORMAT)}
-                    
-                 </p>
-            )):<p>No Task yet</p>
-            }
+            {tasks.length > 0 ? (
+                <TaskItems tasks={tasks}  selectedTab={selectedTab} /> 
+                ): (<p>No tasks yet</p>)}
+
         </div>
     );
 }
