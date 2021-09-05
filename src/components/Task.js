@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import dateFnsFormat from 'date-fns/format'
-// import { filter } from 'minimatch';
+
 import { addDays, isAfter, isBefore, isToday } from 'date-fns';
 
 
